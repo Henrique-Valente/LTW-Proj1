@@ -17,6 +17,9 @@ html * {
   justify-content: center;
   text-align: center;
   margin-top: 0.5em;
+}
+
+#pageTitle{
   font-size: 50px !important;
 }
 
@@ -89,6 +92,9 @@ button {
   height: 500px;
 }
 
+#settingsTitle{
+  font-size: 25px;
+}
 /* ------- */
 
 footer {
