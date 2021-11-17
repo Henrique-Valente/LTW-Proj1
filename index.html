@@ -17,28 +17,41 @@
     />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   </head>
+
   <body bgcolor="#1B2021">
     <h1 class="title" id="pageTitle">Mancala</h1>
 
-    <div class="settingsDiv">
-      <ul>
-        <li>
-          <div id="settings">
+    <!-- Container principal -->
+    <div class="container-row">
+      
+      <!-- Pagina do jogo -->
+      <div class="item-row" id="gameArea">
+   
+      </div>
+
+      <!-- Caixa com settings e buttons -->
+      <div class="item-row settingsContainer">
+
+
+          <!-- Caixa das settings -->
+          <div class="" id="settingsBox">
             <h1 class="title" id="settingsTitle">Settings</h1>
-          </div>
-        </li>
-        <li>
-          <button class="settingsButtons" onclick="toggleRules()">Regras</button>
-        </li>
-      </ul>  
+          </div>    
+          
+          <!-- Caixo dos buttons -->
+          <!-- <div class="item-col"> -->
+            <button class="settingsButtons" onclick="toggleRules()">Regras</button>
+          <!-- </div> -->
+
+ 
+      </div>
     </div>
 
-    
-    
-    
-    <div id="regras">
+
+    <div id="regras" style="display: none;">
       regras
     </div>
+
     
   </body>
 </html>
