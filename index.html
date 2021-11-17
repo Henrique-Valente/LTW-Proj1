@@ -25,30 +25,76 @@
     <div class="container-row">
       
       <!-- Pagina do jogo -->
-      <div class="item-row" id="gameArea">
-   
+      <div class="item border" id="gameArea">
+        <!-- isto e um teste, ignorar 
+        <div id="test">
+          <button class="settingsButtons border" onclick="toggletest()">Regras</button>
+        </div> 
+        -->
       </div>
 
       <!-- Caixa com settings e buttons -->
-      <div class="item-row settingsContainer">
+      <div class="item border" id="sidebar">
 
+          <div class="container-col">
 
-          <!-- Caixa das settings -->
-          <div class="" id="settingsBox">
-            <h1 class="title" id="settingsTitle">Settings</h1>
-          </div>    
-          
-          <!-- Caixo dos buttons -->
-          <!-- <div class="item-col"> -->
-            <button class="settingsButtons" onclick="toggleRules()">Regras</button>
-          <!-- </div> -->
+            <!-- Caixa das settings -->
+            <div class="item" id="settingsBox">
+              <div class="text" id="subtitle">Settings</div>
+              
+              <!-- Slider para o numero de pecas -->
+              <div class="sliderContainer">
+                <div class="centerFlexText">
+                  Número de peças
+                </div>
+                <div class="slider">
+                  <input type="range" id="volume" name="volume" min="0" max="11" value="4">
+                  <label id="demo"for="volume">Volume</label>
+                </div>
+              </div>
+              
+              <!-- Slider para o numero inicial de sementes -->
+              <div class="sliderContainer">
+                <div class="centerFlexText">Número de sementes</div>
+                <div class="slider">
+                  <input type="range" id="volume" name="volume" min="0" max="11" onchange="">
+                  <label id="demo"for="volume">10</label>
+                </div>
+              </div>
+
+              <!-- Slider para o nivel de intelegencia artificial -->
+              <div class="sliderContainer">
+                <div class="centerFlexText">Nível da AI</div>
+                <div class="slider">
+                  <input type="range" id="volume" name="volume" min="0" max="11" onchange="">
+                  <label id="demo"for="volume">10</label>
+                </div>
+              </div>
+
+            </div>    
+            
+            <!-- Caixa dos buttons -->
+            <div class="item">
+              <button class="settingsButtons border" onclick="toggleScore()">Pontuação</button>
+            </div>
+
+            <!-- Caixa da pontuacao -->
+            <div class="item">
+              <button class="settingsButtons border" onclick="toggleRules()">Regras</button>
+            </div>
+            
+          </div>
 
  
       </div>
     </div>
 
 
-    <div id="regras" style="display: none;">
+    <div class="hiddenBox border" id="rules">
+      Pontuação
+    </div>
+
+    <div class="hiddenBox border" id="score">
       regras
     </div>
 

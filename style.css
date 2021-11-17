@@ -20,75 +20,93 @@ html {
 #pageTitle{
   font-size: 50px !important;
 }
-/* ----------------- */
+/* -------------------------- */
 
-/* ----Containers--- */
+/* --------Containers-------- */
+
 .container-row{
   display: flex;
   flex-direction: row;
-  justify-content: center;
-}
-
-.item-row {
-  height: 500px;
-  margin: 5px;
-  padding: 5px;
-  line-height: 150px;
-  color: white;
-  font-weight: bold;
-  font-size: 3em;
-  text-align: center;
+  justify-content: space-between;
+  height: 700px;
+  gap: 10px 10px;
 }
 
 .container-col{
   display: flex;
   flex-direction: column;
-  align-items: center;
-  /* justify-content: center; */
+  justify-content: space-between;
+  height: 100%;
+  gap: 10px 10px;
 }
 
-.item-col {
-  /* margin: 5px;
-  padding: 5px; */
-  height: 10%;
-  line-height: 150px;
-  color: white;
-  font-weight: bold;
-  font-size: 3em;
-  text-align: center;
+.item {
+  padding: 5px;
 }
 
-/* ----------------- */
+.sliderContainer{
+  margin-top: 5%;
+  margin-bottom: 5%;
+  margin-left: 8%;
+  margin-right: 8%;
+}
+
+/* -------------------------- */
+
+/* --------Containers-------- */
+.border{
+  border: 2px solid white;
+}
 
 .settingsButtons{
+  width: 100%;
   color:white;
   background-color: var(--backgroundColor);
-  border: 2px solid white;
-  /* padding: 15px 32px; */
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
+  display: block;
   font-size: 16px;
-  height: 53px;
-  width: 100%;
+  text-align: center;
 } 
 
-.settingsContainer{
-  border: 2px solid white;
+.slider{
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
+  padding: 5px;
+}
+
+/* -------------------------- */
+
+/* ----Sizes of containers--- */
+
+#gameArea{
+  width: 80%;
+}
+#sidebar{
   width: 20%;
 }
 
 #settingsBox{
-
-  height: 60%;
+  height: 100%;
 }
-#settingsTitle{
+
+/* -------------------------- */
+
+/* -----------Text----------- */
+
+.text{
+  font-weight: bold;
+  font-size: 3em;
+  text-align: center;
+}
+.centerFlexText{
+  display: flex;
+  justify-content: center;
+}
+#subtitle{
   font-size: 25px;
+  margin-bottom: 10px;
 }
 
-#gameArea{
-  width: 100%;
-  border: 2px solid white;
+.hiddenBox{
+  display: none;
 }
-
-/* ------- */
