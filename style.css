@@ -44,28 +44,11 @@ section img{
 }
 /* ----------------- */
 
-/* img css */
-
-figure {
-  float: right;
-  width: 30%;
-  text-align: center;
-  font-style: italic;
-  font-size: 90%;
-  text-indent: 0;
-  border: thin silver solid;
-  margin: 10px;
-  padding: 0.5em;
-}
-figure p {
-  margin: 0;
-}
-img.scaled {
-  width: 100%;
+ul{
+  list-style-type: none;
 }
 
-
-button {
+.settingsButtons {
   color:white;
   background-color:#1B2021; 
   border: 2px solid white;
@@ -74,20 +57,20 @@ button {
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
-}
+  height: 53px;
+  width: 300px;
+  /*margin-top: 2px;
+  margin-bottom: 2px;*/
+} 
 
-#settingsButton{
+.settingsDiv{
   float:right;
+  
 }
 
 #settings{
   background-color:#1B2021; 
   border: 2px solid white;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  margin-top: -250px;
-  margin-left: -150px;
   width: 300px;
   height: 500px;
 }
@@ -96,10 +79,3 @@ button {
   font-size: 25px;
 }
 /* ------- */
-
-footer {
-  position:absolute;
-  bottom:0;
-  text-align: justify;
-  left: 0;
-}

@@ -1,5 +1,5 @@
-function toggleFun(){
-    var x = document.getElementById("settings"); 
+function toggleRules(){
+    const x = document.getElementById("regras"); 
     if(x.style.display == "none"){
         x.style.display = "block";
     }
