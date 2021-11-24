@@ -22,6 +22,8 @@ html {
 }
 /* -------------------------- */
 
+/* ----------------------------------------------UI---------------------------------------------- */
+
 /* --------Containers-------- */
 
 .container-row{
@@ -53,7 +55,7 @@ html {
 
 /* -------------------------- */
 
-/* --------Containers-------- */
+/* ---------Settings--------- */
 .border{
   border: 2px solid white;
 }
@@ -79,6 +81,9 @@ html {
 /* ----Sizes of containers--- */
 
 #gameArea{
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 80%;
 }
 #sidebar{
@@ -109,4 +114,39 @@ html {
 
 .hiddenBox{
   display: none;
+  margin-top: 10px;
 }
+
+
+/* -------------------------- */
+
+/* -Settings box controller-- */
+#apply_box{
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+#apply{
+  background-color: green !important;
+}
+#cancel{
+  background-color: red !important;
+}
+/* -------------------------- */
+
+/* ----------------------------------------------------------------------------------------------- */
+
+/* ---------------------------------------------Board--------------------------------------------- */
+
+.board-container{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-gap: 5px;
+}
+.holes{
+  width: 10px;
+  height: 10px;
+}
+
+/* ----------------------------------------------------------------------------------------------- */
+

@@ -26,11 +26,11 @@
       
       <!-- Pagina do jogo -->
       <div class="item border" id="gameArea">
-        <!-- isto e um teste, ignorar 
-        <div id="test">
-          <button class="settingsButtons border" onclick="toggletest()">Regras</button>
-        </div> 
-        -->
+        <div class="board-container" id="test">
+          
+          
+        </div>
+        
       </div>
 
       <!-- Caixa com settings e buttons -->
@@ -42,14 +42,25 @@
             <div class="item" id="settingsBox">
               <div class="text" id="subtitle">Settings</div>
               
+              <!-- Slider para o numero de buracos -->
+              <div class="sliderContainer">
+                <div class="centerFlexText">
+                  Número de buracos
+                </div>
+                <div class="slider">
+                  <input type="range" id="slider_holes" name="volume" min="8" max="20" value="12" step="2">
+                  <label id="output_holes" for="slider_holes">Volume</label>
+                </div>
+              </div>
+
               <!-- Slider para o numero de pecas -->
               <div class="sliderContainer">
                 <div class="centerFlexText">
                   Número de peças
                 </div>
                 <div class="slider">
-                  <input type="range" id="volume" name="volume" min="0" max="11" value="4">
-                  <label id="demo"for="volume">Volume</label>
+                  <input type="range" id="slider_seeds" name="volume" min="0" max="11" value="4">
+                  <label id="output_seeds"for="slider_seeds">Volume</label>
                 </div>
               </div>
               
@@ -72,10 +83,16 @@
               </div>
 
             </div>    
-            
+
+            <!-- Caixa dos buttons -->
+            <div class="item" id="apply_box">
+              <button class="settingsButtons border" id="cancel" onclick="toggleCancel()">Cancel</button>
+              <button class="settingsButtons border" id="apply" onclick="toggleApply()">Apply</button>
+            </div>
+
             <!-- Caixa dos buttons -->
             <div class="item">
-              <button class="settingsButtons border" onclick="toggleScore()">Pontuação</button>
+              <button class="settingsButtons border" onclick="board()">Pontuação</button>
             </div>
 
             <!-- Caixa da pontuacao -->
