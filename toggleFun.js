@@ -37,7 +37,6 @@ let current_seeds = {value:""};
 
 // This function updates values in slider
 let slider_holes ; let output_holes ;
-
 let slider_seeds ; let output_seeds ;
 
 document.addEventListener("DOMContentLoaded", function( ) {
@@ -64,21 +63,27 @@ document.addEventListener("DOMContentLoaded", function( ) {
     }
 })
 
+window.onload = function() {
+    board();
+  };
 
 function toggleCancel(){
 
     slider_holes.value = current_holes.value;
     output_holes.innerHTML = current_holes.value;
 
-    slider_seeds.value = current_holes.value;
-    output_seeds.innerHTML = current_holes.value;
+    slider_seeds.value = current_seeds.value;
+    output_seeds.innerHTML = current_seeds.value;
     
 }
 
 function toggleApply(){
+    reset();
 
     current_holes.value = slider_holes.value;
     current_seeds.value = slider_seeds.value;
+
+    board();
     
 }
 
@@ -86,12 +91,30 @@ function debbug(){
     console.log('current_holes.value ' + current_holes.value + ' current_seeds.value ' + current_seeds.value)
 }
 
+function reset(){
+
+    for(let i=0;i < current_holes.value / 2;i++){
+        let rangeValue_reset = document.getElementById("pt"+i);
+        rangeValue_reset.remove();
+    }
+
+    for(let i=0;i < current_holes.value / 2;i++){
+        let rangeValue_reset = document.getElementById("pb"+i);
+        rangeValue_reset.remove();
+    }
+    
+}
+
 function board(){
 
-    var rangeValue = document.getElementById("test");
+    let rangeValue_topmid = document.getElementById("topmid");
+    let rangeValue_botmid = document.getElementById("botmid");
 
-    for(let i=0;i<=10;i++){
-        rangeValue.innerHTML += '<div class="holes border">'+i+'</div>';
+    for(let i=0;i < current_holes.value / 2;i++){
+        rangeValue_topmid.innerHTML += '<div class="pot border" id="pt'+i+'">'+i+'</div>';
+    }
+    for(let i=0;i < current_holes.value / 2;i++){
+        rangeValue_botmid.innerHTML += '<div class="pot border" id="pb'+i+'">'+i+'</div>';
     }
 }
  // var rangeValue = document.getElementById("test");
