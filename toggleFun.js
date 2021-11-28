@@ -79,7 +79,8 @@ function toggleApply(){
 
     current_holes.value = slider_holes.value;
     current_seeds.value = slider_seeds.value;
-    
+    fill_holes();
+
 }
 
 function debbug(){
@@ -101,3 +102,28 @@ function board(){
     // for(let i=0;i<=10;i++){
         // rangeValue.innerHTML += '<div>'+i+'</div>';
     // }
+
+let player_1 = [];
+let player_2 = [];
+let score_player_1;
+let score_player_2;
+    
+function fill_holes(){
+    let index ;
+        
+    for (index = 0; index < current_holes.value; index++) {
+        player_1.push(current_seeds.value);
+        player_2.push(current_seeds.value);
+    } 
+}
+
+let button_pressed_number;
+
+function move_press(){
+    
+}
+
+//O player 1 é o da parte de baixo do tabuleiro
+function move_player_1(){
+    
+}
