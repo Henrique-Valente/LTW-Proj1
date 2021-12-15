@@ -1,15 +1,3 @@
-function Seed(id) {
-    this.id = id
-}
-
-function Holes(capacity) {
-    this.capacity = capacity
-}
-
-function Board(holes_capacity) {
-    this.holes_capacity = holes_capacity
-}
-
 function toggleRules(){
     const x = document.getElementById("rules"); 
     if(x.style.display == "none"){
@@ -31,8 +19,8 @@ function toggleScore(){
 
 // Current board settings
 
-let current_holes = {value:""};
-let current_seeds = {value:""};
+let current_holes = {value:0};
+let current_seeds = {value:0};
 
 
 // This function updates values in slider
@@ -64,7 +52,8 @@ document.addEventListener("DOMContentLoaded", function( ) {
 })
 
 window.onload = function() {
-    board();
+    let game = new Game(current_holes.value,current_seeds.value);
+    board(game);
   };
 
 function toggleCancel(){
@@ -83,7 +72,8 @@ function toggleApply(){
     current_holes.value = slider_holes.value;
     current_seeds.value = slider_seeds.value;
 
-    board();
+    let game = new Game(current_holes.value,current_seeds.value);
+    board(game);
     
 }
 
@@ -105,15 +95,15 @@ function reset(){
     
 }
 
-function board(){
+function board(game){
 
     let rangeValue_topmid = document.getElementById("topmid");
     let rangeValue_botmid = document.getElementById("botmid");
 
-    for(let i=0;i < current_holes.value / 2;i++){
+    for(let i=0;i < (game.size - 2) / 2;i++){
         rangeValue_topmid.innerHTML += '<div class="pot border" id="pt'+i+'">'+i+'</div>';
     }
-    for(let i=0;i < current_holes.value / 2;i++){
+    for(let i=0;i < (game.size - 2) / 2;i++){
         rangeValue_botmid.innerHTML += '<div class="pot border" id="pb'+i+'">'+i+'</div>';
     }
 }

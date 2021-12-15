@@ -9,6 +9,8 @@
     <!-- texto na decoração da janela -->
     <link rel="stylesheet" href="style.css" type="text/css" />
     <script src="toggleFun.js"></script> <!-- Chama a função js -->
+    <script src="circularLinkedList.js"></script> <!-- Chama a função js -->
+    <script src="game.js"></script> <!-- Chama a função js -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -64,36 +66,27 @@
                 </div>
                 <div class="slider">
                   <input type="range" id="slider_holes" name="volume" min="8" max="20" value="12" step="2">
-                  <label id="output_holes" for="slider_holes">Volume</label>
+                  <label id="output_holes" for="slider_holes">12</label>
                 </div>
               </div>
 
-              <!-- Slider para o numero de pecas -->
+              <!-- Slider para o numero de sementes -->
               <div class="sliderContainer">
                 <div class="centerFlexText">
-                  Número de peças
+                  Número de sementes
                 </div>
                 <div class="slider">
                   <input type="range" id="slider_seeds" name="volume" min="0" max="11" value="4">
-                  <label id="output_seeds"for="slider_seeds">Volume</label>
+                  <label id="output_seeds"for="slider_seeds">4</label>
                 </div>
               </div>
               
-              <!-- Slider para o numero inicial de sementes -->
-              <div class="sliderContainer">
-                <div class="centerFlexText">Número de sementes</div>
-                <div class="slider">
-                  <input type="range" id="volume" name="volume" min="0" max="11" onchange="">
-                  <label id="demo"for="volume">10</label>
-                </div>
-              </div>
-
               <!-- Slider para o nivel de intelegencia artificial -->
               <div class="sliderContainer">
                 <div class="centerFlexText">Nível da AI</div>
                 <div class="slider">
-                  <input type="range" id="volume" name="volume" min="0" max="11" onchange="">
-                  <label id="demo"for="volume">10</label>
+                  <input type="range" id="volume" name="volume" min="0" max="3" value="2">
+                  <label id="demo"for="volume">2</label>
                 </div>
               </div>
 
