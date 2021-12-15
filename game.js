@@ -1,32 +1,19 @@
 class Game {
     constructor(size, seeds){
         let board_game = new CircularLinkedList();
-<<<<<<< HEAD
-        for(let i=0; i<size+2; i++){
-            if(i != size/2 && i != size+1)board_game.add_node_end(seeds);
-=======
 
         this.size = parseInt(size)+2;
 
         for(let i=0; i<this.size; i++){
             if(i != size/2 && i != (this.size-1))board_game.add_node_end(seeds);
->>>>>>> tiago
             else board_game.add_node_end(0);
         }
 
         this.board = board_game;
-<<<<<<< HEAD
-        this.size = size+2;
-=======
->>>>>>> tiago
         this.player = 1;
     }
 
     print_player(){
-<<<<<<< HEAD
-        if(this.player == 1) console.log("PLAYER 1:");
-        else console.log("PLAYER 2:");
-=======
         if(this.player == 1) {
             console.log("PLAYER 1:");
             return "Player: 1";
@@ -35,7 +22,6 @@ class Game {
             console.log("PLAYER 2:");
             return "Player: 2";
         } 
->>>>>>> tiago
     }
 
     print_game(){
