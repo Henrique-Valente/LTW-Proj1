@@ -95,4 +95,15 @@ class CircularLinkedList {
 
         return cur;
     }
+
+    get_pos(cur){
+        let i = 0;
+        let temp = this.head;
+        while(temp != cur){
+            temp = temp.next;
+            i++;
+        }
+
+        return i;
+    }
 }

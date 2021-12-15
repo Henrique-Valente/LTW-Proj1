@@ -22,9 +22,18 @@ class Game {
 
 
     check_state(cur){
+        if(cur.element == 1){
+            let cur_pos = this.board.get_pos(cur);
+            let adjacent_hole = this.board.go_to_pos(this.size - cur_pos - 2);
+            let temp = adjacent_hole.element;
+            adjacent_hole.element = 0;
+            cur.element += temp;
+        }
+        
         if(cur != this.board.go_to_pos((this.size-2)/2) && cur != this.board.go_to_pos(this.size-1)){
             this.player = 2;
         }
+
         this.print_game();
     }
 
@@ -45,10 +54,3 @@ class Game {
         this.check_state(cur);
     }
 }
-
-let test = new Game(12,4);
-
-test.print_game();
-test.move_pieces(2);
-test.move_pieces(3);
-test.move_pieces(6);
