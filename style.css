@@ -85,6 +85,7 @@ html {
   align-items: center;
   justify-content: center;
   width: 80%;
+  flex-wrap: wrap;
 }
 #sidebar{
   width: 20%;
@@ -117,7 +118,11 @@ html {
   margin-top: 10px;
 }
 
-
+#playerTurnDisplay{
+  flex: 1 0 21%; /* explanation below */
+  margin: 5px;
+  height: 100px;
+}
 /* -------------------------- */
 
 /* -Settings box controller-- */
@@ -139,14 +144,77 @@ html {
 /* ---------------------------------------------Board--------------------------------------------- */
 
 .board-container{
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  grid-gap: 5px;
+  display:flex;
+  height:40%;
+  width:90%;
+  border-radius:50px;
+  padding:30px;
 }
+
 .holes{
-  width: 10px;
-  height: 10px;
+  font-size: 1rem;
+  text-align: center;
+  width: 50px;
+  height: 50px;
+}
+/* ----------------------------------------------------------------------------------------------- */
+
+
+.section{
+  background-color:rgba(255, 255, 255, 0.03);
+  margin:5px;
+}
+
+.endsection{
+  display:flex;
+  flex-grow:1;
+}
+
+.midsection{
+  display:flex;
+  flex-direction:column;
+  flex-grow:6;
+}
+
+.midrow {
+  display:flex;
+  flex-grow:1;
+  height: 50%;
+}
+
+.pot {
+  position:relative;
+  background-color:rgba(255, 255, 255, 0.08);
+  flex-grow:1;
+  margin:5px;
+  border-radius:50px;
+  text-align: center;
+}
+
+
+.seedCountPB{
+  position: absolute;
+  bottom: -30px;
+  width: 100%;
+}
+
+.seedCountPT{
+  position: relative;
+  top: -30px;
+}
+.bead {
+  position:absolute;
+	border-radius: 50%;
+	width: 25px;
+	height: 25px;
 }
 
 /* ----------------------------------------------------------------------------------------------- */
 
+#topmid div[id^='pt']:hover {
+  background-color: yellow;
+}
+
+#botmid div[id^='pb']:hover {
+  background-color: red;
+}

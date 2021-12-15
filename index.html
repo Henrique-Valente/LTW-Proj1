@@ -6,11 +6,13 @@
     <meta charset="UTF-8" />
     <!-- para caracteres acentuados   -->
     <title>Exercicio 1</title>
+    <link rel="shortcut icon" href="#">
     <!-- texto na decoração da janela -->
     <link rel="stylesheet" href="style.css" type="text/css" />
     <script src="circularLinkedList.js"></script> <!-- Chama a função js -->
     <script src="game.js"></script> <!-- Chama a função js -->
     <script src="toggleFun.js"></script> <!-- Chama a função js -->
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -28,6 +30,7 @@
       
       <!-- Pagina do jogo -->
       <div class="item border" id="gameArea">
+<<<<<<< HEAD
         <div class="board-container" id="test">
           <button class="button" value = 0 onclick="move_player_1(this)">test</button>
           <button class="button" value = 1 onclick="move_player_1(this)">test</button>
@@ -35,6 +38,28 @@
           <button class="button" value = 3 onclick="move_player_1(this)">test</button>
           <button class="button" value = 4 onclick="move_player_1(this)">test</button>
           <button class="button" value = 5 onclick="move_player_1(this)">test</button> 
+=======
+        <div id="playerTurnDisplay">
+          <div>Player: 1</div>
+        </div>
+        <!-- Tabuleiro -->
+        <div class="board-container border" id="board">
+          <div class="section endsection" id="startsection">
+            <!-- javascript generation here -->
+          </div>
+          <div class="section midsection">
+            <div class="midrow topmid" id="topmid">
+              <!-- javascript generation here -->
+            </div>
+            <div class="midrow botmid" id="botmid">
+              <!-- javascript generation here -->
+            </div>
+          </div>
+          
+          <div class="section endsection" id="endsection">
+              <!-- javascript generation here -->   
+          </div>
+>>>>>>> tiago
         </div>
         
       </div>
@@ -55,36 +80,27 @@
                 </div>
                 <div class="slider">
                   <input type="range" id="slider_holes" name="volume" min="8" max="20" value="12" step="2">
-                  <label id="output_holes" for="slider_holes">Volume</label>
+                  <label id="output_holes" for="slider_holes">12</label>
                 </div>
               </div>
 
-              <!-- Slider para o numero de pecas -->
+              <!-- Slider para o numero de sementes -->
               <div class="sliderContainer">
                 <div class="centerFlexText">
-                  Número de peças
+                  Número de sementes
                 </div>
                 <div class="slider">
-                  <input type="range" id="slider_seeds" name="volume" min="0" max="11" value="4">
-                  <label id="output_seeds"for="slider_seeds">Volume</label>
+                  <input type="range" id="slider_seeds" name="volume" min="2" max="8" value="4">
+                  <label id="output_seeds"for="slider_seeds">4</label>
                 </div>
               </div>
               
-              <!-- Slider para o numero inicial de sementes -->
-              <div class="sliderContainer">
-                <div class="centerFlexText">Número de sementes</div>
-                <div class="slider">
-                  <input type="range" id="volume" name="volume" min="0" max="11" onchange="">
-                  <label id="demo"for="volume">10</label>
-                </div>
-              </div>
-
               <!-- Slider para o nivel de intelegencia artificial -->
               <div class="sliderContainer">
                 <div class="centerFlexText">Nível da AI</div>
                 <div class="slider">
-                  <input type="range" id="volume" name="volume" min="0" max="11" onchange="">
-                  <label id="demo"for="volume">10</label>
+                  <input type="range" id="volume" name="volume" min="0" max="3" value="2">
+                  <label id="demo"for="volume">2</label>
                 </div>
               </div>
 
