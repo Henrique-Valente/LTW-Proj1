@@ -85,6 +85,7 @@ html {
   align-items: center;
   justify-content: center;
   width: 80%;
+  flex-wrap: wrap;
 }
 #sidebar{
   width: 20%;
@@ -117,7 +118,11 @@ html {
   margin-top: 10px;
 }
 
-
+#playerTurnDisplay{
+  flex: 1 0 21%; /* explanation below */
+  margin: 5px;
+  height: 100px;
+}
 /* -------------------------- */
 
 /* -Settings box controller-- */
@@ -174,6 +179,7 @@ html {
 .midrow {
   display:flex;
   flex-grow:1;
+  height: 50%;
 }
 
 .pot {
@@ -182,12 +188,20 @@ html {
   flex-grow:1;
   margin:5px;
   border-radius:50px;
+  text-align: center;
 }
 
-.pot:hover {
-  background-color: yellow;
+
+.seedCountPB{
+  position: absolute;
+  bottom: -30px;
+  width: 100%;
 }
 
+.seedCountPT{
+  position: relative;
+  top: -30px;
+}
 .bead {
   position:absolute;
 	border-radius: 50%;
@@ -197,3 +211,10 @@ html {
 
 /* ----------------------------------------------------------------------------------------------- */
 
+#topmid div[id^='pt']:hover {
+  background-color: yellow;
+}
+
+#botmid div[id^='pb']:hover {
+  background-color: red;
+}

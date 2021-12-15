@@ -6,11 +6,13 @@
     <meta charset="UTF-8" />
     <!-- para caracteres acentuados   -->
     <title>Exercicio 1</title>
+    <link rel="shortcut icon" href="#">
     <!-- texto na decoração da janela -->
     <link rel="stylesheet" href="style.css" type="text/css" />
-    <script src="toggleFun.js"></script> <!-- Chama a função js -->
     <script src="circularLinkedList.js"></script> <!-- Chama a função js -->
     <script src="game.js"></script> <!-- Chama a função js -->
+    <script src="toggleFun.js"></script> <!-- Chama a função js -->
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -28,23 +30,25 @@
       
       <!-- Pagina do jogo -->
       <div class="item border" id="gameArea">
+        <div id="playerTurnDisplay">
+          <div>Player: 1</div>
+        </div>
+        <!-- Tabuleiro -->
         <div class="board-container border" id="board">
-          <div class="section endsection" id="endsection">
-              <div class="pot border" id="mb"></div> 
+          <div class="section endsection" id="startsection">
+            <!-- javascript generation here -->
           </div>
           <div class="section midsection">
             <div class="midrow topmid" id="topmid">
-
-
+              <!-- javascript generation here -->
             </div>
             <div class="midrow botmid" id="botmid">
-             
-
+              <!-- javascript generation here -->
             </div>
           </div>
           
-          <div class="section endsection">
-              <div class="pot border" id="mt"></div>        
+          <div class="section endsection" id="endsection">
+              <!-- javascript generation here -->   
           </div>
         </div>
         
@@ -76,7 +80,7 @@
                   Número de sementes
                 </div>
                 <div class="slider">
-                  <input type="range" id="slider_seeds" name="volume" min="0" max="11" value="4">
+                  <input type="range" id="slider_seeds" name="volume" min="2" max="8" value="4">
                   <label id="output_seeds"for="slider_seeds">4</label>
                 </div>
               </div>

@@ -1,20 +1,27 @@
 class Game {
     constructor(size, seeds){
         let board_game = new CircularLinkedList();
-        for(let i=0; i<size+2; i++){
-            if(i != size/2 && i != size+1)board_game.add_node_end(seeds);
+
+        this.size = parseInt(size)+2;
+
+        for(let i=0; i<this.size; i++){
+            if(i != size/2 && i != (this.size-1))board_game.add_node_end(seeds);
             else board_game.add_node_end(0);
         }
 
         this.board = board_game;
-        this.size = parseInt(size)+2;
         this.player = 1;
-        console.log(this.size)
     }
 
     print_player(){
-        if(this.player == 1) console.log("PLAYER 1:");
-        else console.log("PLAYER 2:");
+        if(this.player == 1) {
+            console.log("PLAYER 1:");
+            return "Player: 1";
+        }
+        else{
+            console.log("PLAYER 2:");
+            return "Player: 2";
+        } 
     }
 
     print_game(){
