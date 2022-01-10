@@ -162,10 +162,12 @@ function board(game){
 function updateCanvas(index){
     let cur = game.board.go_to_pos(index);
     if(game.player == 1 && game.check_board_side(cur) == 1 || game.player == 2 && game.check_board_side(cur) == 2){
-        game.move_pieces(index);
-        reset();
-        board(game);
-        clearBox('playerTurnDisplay');
-        document.getElementById('playerTurnDisplay').innerHTML += '<div>'+game.print_player()+'</div>';
+        if(cur.element != 0){
+            game.move_pieces(index);
+            reset();
+            board(game);
+            clearBox('playerTurnDisplay');
+            document.getElementById('playerTurnDisplay').innerHTML += '<div>'+game.print_player()+'</div>';
+        }
     }
 }
