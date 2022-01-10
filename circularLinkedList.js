@@ -5,6 +5,7 @@ class Node {   //Nó da Lista
     }
 
     to_String(){
+        if(this.element == null) console.log("Null element");
         console.log("Valor: " + this.element + " Próximo: " + this.next.element);
     }
 }

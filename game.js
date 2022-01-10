@@ -9,25 +9,14 @@ class Game {
             else board_game.add_node_end(0);
         }
 
+        let cur1 = board_game.go_to_pos(size/2);
+        let cur2 = board_game.go_to_pos(parseInt(size) + parseInt(1));
+
         this.board = board_game;
         this.player = 1;
+        this.store1 = cur1;
+        this.store2 = cur2;
     }
-
-    print_player(){
-        if(this.player == 1) {
-            console.log("PLAYER 1:");
-            return "Player: 1";
-        }
-        else{
-            console.log("PLAYER 2:");
-            return "Player: 2";
-        } 
-    }
-
-    print_game(){
-        this.board.printList();
-    }
-
 
     check_state(cur){
         if(cur.element == 1){
@@ -35,7 +24,9 @@ class Game {
             let adjacent_hole = this.board.go_to_pos(this.size - cur_pos - 2);
             let temp = adjacent_hole.element;
             adjacent_hole.element = 0;
-            cur.element += temp;
+            cur.element = 0;
+            if(this.player == 1) this.store1.element = parseInt(this.store1.element) + parseInt(temp);
+            else this.store2.element = parseInt(this.store2.element) + parseInt(temp);
         }
         
         if(cur != this.board.go_to_pos((this.size-2)/2) && cur != this.board.go_to_pos(this.size-1)){
@@ -61,5 +52,20 @@ class Game {
         }
 
         this.check_state(cur);
+    }
+
+    print_player(){
+        if(this.player == 1) {
+            console.log("PLAYER 1:");
+            return "Player: 1";
+        }
+        else{
+            console.log("PLAYER 2:");
+            return "Player: 2";
+        } 
+    }
+
+    print_game(){
+        this.board.printList();
     }
 }

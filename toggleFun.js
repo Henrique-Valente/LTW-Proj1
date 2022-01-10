@@ -160,10 +160,10 @@ function board(game){
 }
 
 function updateCanvas(index){
+    //if(game.player == 1 && pos > )
     game.move_pieces(index);
     reset();
     board(game);
     clearBox('playerTurnDisplay');
     document.getElementById('playerTurnDisplay').innerHTML += '<div>'+game.print_player()+'</div>';
-
 }
