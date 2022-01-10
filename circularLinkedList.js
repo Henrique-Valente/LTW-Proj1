@@ -83,7 +83,7 @@ class CircularLinkedList {
             }
         }
     }
-
+    
     go_to_pos(pos){
         let cur = this.head;
 

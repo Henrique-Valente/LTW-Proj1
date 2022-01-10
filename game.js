@@ -18,16 +18,23 @@ class Game {
         this.store2 = cur2;
     }
 
+    check_board_side(cur){ // returns which side of the board the given node is in
+        if(this.board.get_pos(cur) >= 0 && this.board.get_pos(cur) <= (this.size-2)/2) return 1;
+        else return 2;
+    }
+
     check_state(cur){
         if(cur.element == 1){
-            let cur_pos = this.board.get_pos(cur);
-            let adjacent_hole = this.board.go_to_pos(this.size - cur_pos - 2);
-            let temp = adjacent_hole.element;
-            adjacent_hole.element = 0;
-            cur.element = 0;
-            if(this.player == 1) this.store1.element = parseInt(this.store1.element) + parseInt(temp);
-            else this.store2.element = parseInt(this.store2.element) + parseInt(temp);
-        }
+            if(this.player == 1 && this.check_board_side(cur) == 1 || this.player == 2 && this.check_board_side(cur) == 2){
+                let cur_pos = this.board.get_pos(cur);
+                let adjacent_hole = this.board.go_to_pos(this.size - cur_pos - 2);
+                let temp = adjacent_hole.element;
+                adjacent_hole.element = 0;
+                cur.element = 0;
+                if(this.player == 1) this.store1.element = parseInt(this.store1.element) + parseInt(temp);
+                else this.store2.element = parseInt(this.store2.element) + parseInt(temp);
+            }
+        } 
         
         if(cur != this.board.go_to_pos((this.size-2)/2) && cur != this.board.go_to_pos(this.size-1)){
             if(this.player == 1) this.player = 2;
