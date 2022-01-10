@@ -39,7 +39,8 @@ class Game {
         }
         
         if(cur != this.board.go_to_pos((this.size-2)/2) && cur != this.board.go_to_pos(this.size-1)){
-            this.player = 2;
+            if(this.player == 1) this.player = 2;
+            else this.player = 1;
         }
 
         this.print_game();
