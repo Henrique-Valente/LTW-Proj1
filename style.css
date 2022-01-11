@@ -200,8 +200,9 @@ html {
 }
 
 .seedCountPT{
-  position: relative;
+  position: absolute;
   top: -30px;
+  width: 100%;
 }
 .bead {
   position:absolute;

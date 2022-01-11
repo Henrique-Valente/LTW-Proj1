@@ -148,13 +148,13 @@ function genDivScore(type,index,game){
     if(type == 'mt'){
         return '<div class="pot border" id="'+type+'">'
             +'<div class="seedCountPB">'
-                +game.board.get_element_at_position(index)
+                + "Score: " + game.board.get_element_at_position(index)
             +'</div>' 
         +'</div>';
     }else{
         return '<div class="pot border" id="'+type+'">'
             +'<div class="seedCountPT">'
-                +game.board.get_element_at_position(index)
+                + "Score: " + game.board.get_element_at_position(index)
             +'</div>' 
         +'</div>';
     }
