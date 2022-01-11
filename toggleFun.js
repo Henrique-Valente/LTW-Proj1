@@ -21,11 +21,13 @@ function toggleScore(){
 
 let current_holes = {value:0};
 let current_seeds = {value:0};
+let ai_level = {value:1};
 
 
 // This function updates values in slider
 let slider_holes ; let output_holes ;
 let slider_seeds ; let output_seeds ;
+let slider_ai    ; let output_ai    ;
 
 document.addEventListener("DOMContentLoaded", function( ) {
     // holes start function
@@ -48,6 +50,17 @@ document.addEventListener("DOMContentLoaded", function( ) {
 
     slider_seeds.oninput = function() {
         output_seeds.innerHTML = this.value;
+    }
+
+    // ai start function
+    slider_ai = document.getElementById("slider_ai");
+    output_ai = document.getElementById("output_ai");
+    output_ai.innerHTML = slider_ai.value;
+
+    ai_level.value = slider_ai.value;
+
+    slider_ai.oninput = function() {
+        output_ai.innerHTML = this.value;
     }
 })
 let game;
