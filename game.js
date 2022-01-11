@@ -24,7 +24,7 @@ class Game {
     }
 
     check_state(cur){
-        if(cur.element == 1){
+        if(cur.element == 1 && cur != this.store1 && cur != this.store2){
             if(this.player == 1 && this.check_board_side(cur) == 1 || this.player == 2 && this.check_board_side(cur) == 2){
                 let cur_pos = this.board.get_pos(cur);
                 let adjacent_hole = this.board.go_to_pos(this.size - cur_pos - 2);
@@ -40,22 +40,26 @@ class Game {
             if(this.player == 1) this.player = 2;
             else this.player = 1;
         }
-
+        console.log("Depois");
         this.print_game();
     }
 
     move_pieces(element){
         this.print_player();
+        console.log("Antes");
         this.print_game();
-        let pos = element; //Terá de ser element.value quando implementarmos os botões
+        let pos = element; 
         let cur = this.board.go_to_pos(pos);
         let temp = cur.element;
         
         cur.element = 0;
         cur = cur.next;
         for(let i=0; i<temp; i++){
+            if(cur == this.store1 && this.player == 2 || cur == this.store2 && this.player == 1){
+                cur = cur.next;
+            }
             cur.element++;
-            if(i != temp-1)cur = cur.next;
+            if(i != temp-1)cur = cur.next; // Para puder verificar o estado do último nó aumentado
         }
 
         this.check_state(cur);

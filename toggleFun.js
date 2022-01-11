@@ -115,11 +115,11 @@ function updateHoverOnPlayer() {
 }
 
 function addClass(input,name_class) {
-    console.log(input)
+    //console.log(input)
     let tmp =  document.getElementById(input).classList.add(name_class);
 }
 function removeClass(input,name_class) {
-    console.log(input)
+    //console.log(input)
     let tmp = document.getElementById(input).classList.remove(name_class);
 }
 
