@@ -212,10 +212,11 @@ html {
 
 /* ----------------------------------------------------------------------------------------------- */
 
-#topmid div[id^='pt']:hover {
-  background-color: yellow;
+
+.P1_hover:hover {
+  background-color: red;
 }
 
-#botmid div[id^='pb']:hover {
-  background-color: red;
+.P2_hover:hover {
+  background-color: yellow;
 }

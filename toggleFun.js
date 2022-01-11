@@ -77,6 +77,39 @@ function toggleApply(){
     
 }
 
+//
+
+function updateHoverOnPlayer() {
+    let holes = (game.size);
+
+    if (game.player === 1){
+
+        for(let i = 0; i < holes/2-1; i++){
+            addClass("pb"+i,"P1_hover"); 
+        }
+        for(let i = holes/2; i < holes-1; i++){
+            removeClass("pt"+i,"P2_hover");
+        }
+    }
+    else{ 
+        for(let i = 0; i < holes/2-1; i++){
+            removeClass("pb"+i,"P1_hover");
+        }
+        for(let i = holes/2; i < holes-1; i++){
+            addClass("pt"+i,"P2_hover");
+        }  
+    }
+}
+
+function addClass(input,name_class) {
+    console.log(input)
+    let tmp =  document.getElementById(input).classList.add(name_class);
+}
+function removeClass(input,name_class) {
+    console.log(input)
+    let tmp = document.getElementById(input).classList.remove(name_class);
+}
+
 // funcao para limpar todos of filhos de um elemento
 function clearBox(elementID) {
     let div = document.getElementById(elementID);
@@ -90,19 +123,20 @@ function reset(){
     clearBox('topmid');
     clearBox('botmid');
     clearBox('startsection');
-    clearBox('endsection');    
+    clearBox('endsection');  
+    clearBox('playerTurnDisplay');
 }
 
 // funcao para gerar os buracos, type = "pb" e do P1, type = "pt" e do P2
 function genDiv(type,index,game){
     if(type == 'pb'){
-        return '<div class="pot border" id="'+type+index+'" style="width:'+(100/(game.size/2))+'%'+'" onClick="updateCanvas('+index+')">'
+        return '<div class="pot border P1_hover" id="'+type+index+'" style="width:'+(100/(game.size/2))+'%'+'" onClick="updateCanvas('+index+')">'
             +'<div class="seedCountPB">'
                 +game.board.get_element_at_position(index)
             +'</div>' 
         +'</div>';
     }else{
-        return '<div class="pot border" id="'+type+index+'" style="width:'+(100/(game.size/2))+'%'+'" onClick="updateCanvas('+index+')">'
+        return '<div class="pot border P2_hover" id="'+type+index+'" style="width:'+(100/(game.size/2))+'%'+'" onClick="updateCanvas('+index+')">'
             +'<div class="seedCountPT">'
                 +game.board.get_element_at_position(index)
             +'</div>' 
@@ -136,6 +170,9 @@ function board(game){
     let holes = (game.size);
     let i=0;
 
+    // adicionar que jogador é a vez
+    document.getElementById('playerTurnDisplay').innerHTML += '<div>'+game.print_player()+'</div>';
+
     // preencher a parte de baixo = P1
     for(;i < holes/2-1;i++){
         rangeValue_botmid.innerHTML += genDiv("pb",i,game);
@@ -166,6 +203,7 @@ function updateCanvas(index){
             game.move_pieces(index);
             reset();
             board(game);
+            updateHoverOnPlayer();
             clearBox('playerTurnDisplay');
             document.getElementById('playerTurnDisplay').innerHTML += '<div>'+game.print_player()+'</div>';
         }
