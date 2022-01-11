@@ -63,7 +63,9 @@ document.addEventListener("DOMContentLoaded", function( ) {
         output_ai.innerHTML = this.value;
     }
 })
+
 let game;
+
 window.onload = function() {
     game = new Game(current_holes.value,current_seeds.value);
     board(game);
@@ -89,6 +91,31 @@ function toggleApply(){
     board(game);
     
 }
+function generateRandomIntegerInRange(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+
+//
+
+function genBeads(type,index,game){
+
+    if(type === "mt" || type === "mb"){
+	    var square = document.getElementById(type);
+    } else{
+        var square = document.getElementById(type+index);
+    }
+
+    var number = game.board.get_element_at_position(index);
+
+    for (let int = 0; int < number; int++) {
+        let x = generateRandomIntegerInRange(35,0);
+        let y = generateRandomIntegerInRange(0,35);
+
+        square.innerHTML += "<div class=bead style=top:"+x+"px;"+"left:"+y+"px"+"></div>"
+    }
+}
+
 
 //
 
@@ -143,13 +170,13 @@ function reset(){
 // funcao para gerar os buracos, type = "pb" e do P1, type = "pt" e do P2
 function genDiv(type,index,game){
     if(type == 'pb'){
-        return '<div class="pot border P1_hover" id="'+type+index+'" style="width:'+(100/(game.size/2))+'%'+'" onClick="updateCanvas('+index+')">'
+        return '<div class="pot border" id="'+type+index+'" style="width:'+(100/(game.size/2))+'%'+'" onClick="updateCanvas('+index+')">'
             +'<div class="seedCountPB">'
                 +game.board.get_element_at_position(index)
             +'</div>' 
         +'</div>';
     }else{
-        return '<div class="pot border P2_hover" id="'+type+index+'" style="width:'+(100/(game.size/2))+'%'+'" onClick="updateCanvas('+index+')">'
+        return '<div class="pot border" id="'+type+index+'" style="width:'+(100/(game.size/2))+'%'+'" onClick="updateCanvas('+index+')">'
             +'<div class="seedCountPT">'
                 +game.board.get_element_at_position(index)
             +'</div>' 
@@ -189,10 +216,13 @@ function board(game){
     // preencher a parte de baixo = P1
     for(;i < holes/2-1;i++){
         rangeValue_botmid.innerHTML += genDiv("pb",i,game);
+        genBeads("pb",i,game);
     }
 
     // preencher score do player 1, porque esta a direita
     rangeValue_rightmid.innerHTML += genDivScore("mt",i,game);
+    genBeads("mt",i,game);
+
     i++; //incrementar
     
     temp = i;
@@ -200,12 +230,17 @@ function board(game){
 
     // preencher score do player 2, porque esta a esquerda
     rangeValue_leftmid.innerHTML += genDivScore("mb",i,game);
+    genBeads("mb",i,game);
+    
     i--; //decrementar 
 
     // preencher a parte de cima = P2
     for(;i >= temp;i--){
         rangeValue_topmid.innerHTML += genDiv("pt",i,game);
+        genBeads("pt",i,game);
     }
+
+    updateHoverOnPlayer();
 
 }
 

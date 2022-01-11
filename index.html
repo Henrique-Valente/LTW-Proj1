@@ -31,7 +31,7 @@
       <!-- Pagina do jogo -->
       <div class="item border" id="gameArea">
         <div id="playerTurnDisplay">
-          <!-- <div>Player: 1</div> -->
+            <!-- javascript generation here -->
         </div>
         <!-- Tabuleiro -->
         <div class="board-container border" id="board">
@@ -88,15 +88,16 @@
               <!-- RadioButton para selecionar se queremos jogar contra computador
                    Ou contra outro jogador, assim com a quem queremos dar a vez !-->
 
-              <!--
+              
               <div class="sliderContainer">
-                <div class="centerFlexText">Jogar contra: </div>
                 <div class="radiobutton">
-                  <input type="radio" id="opponent_player" name="opponent" value="Outro Jogador">
-                  <label for="opponent_player">Outro Jogador</label>
+                  <input type="radio" id="opponent_player" name="opponent" value="Jogador" checked>
+                  <label for="opponent_player">Jogador</label>
                   <input type="radio" id="opponent_AI" name="opponent" value="AI">
                   <label for="opponent_AI">AI</label>
-              </div> !-->
+              </div>
+            </div>
+
               
               <!-- Slider para o nivel de inteligencia artificial -->
               <div class="sliderContainer">
@@ -107,12 +108,18 @@
                 </div>
               </div> 
 
-            </div>    
-
+            </div>  
+            
+            
             <!-- Caixa dos buttons -->
             <div class="item" id="apply_box">
               <button class="settingsButtons border" id="cancel" onclick="toggleCancel()">Cancel</button>
               <button class="settingsButtons border" id="apply" onclick="toggleApply()">Apply</button>
+            </div>
+            
+            <!-- Caixa dos buttons -->
+            <div class="item" id="apply_box">
+              <button class="settingsButtons border" id="start">Start</button>
             </div>
 
             <!-- Caixa dos buttons -->
