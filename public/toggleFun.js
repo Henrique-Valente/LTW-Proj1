@@ -103,16 +103,22 @@ function genBeads(type,index,game){
 
     if(type === "mt" || type === "mb"){
 	    var square = document.getElementById(type);
+        square.innerHTML += "<div class=test>hi</div>"
+
+        var square2 = document.getElementsByClassName("test")
+        console.log(square2.innerHTML)
+
     } else{
         var square = document.getElementById(type+index);
     }
 
     var number = game.board.get_element_at_position(index);
+    
+    
 
     for (let int = 0; int < number; int++) {
         let x = generateRandomIntegerInRange(35,0);
         let y = generateRandomIntegerInRange(0,35);
-
         square.innerHTML += "<div class=bead style=top:"+x+"px;"+"left:"+y+"px"+"></div>"
     }
 }
