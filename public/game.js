@@ -16,32 +16,12 @@ class Game {
         this.player = 1;
         this.store1 = cur1;
         this.store2 = cur2;
+        this.opponent = 0; // 0 -> Por definir, 1 -> Contra jogador, 2 -> Contra AI
     }
 
     check_board_side(cur){ // returns which side of the board the given node is in
         if(this.board.get_pos(cur) >= 0 && this.board.get_pos(cur) <= (this.size-2)/2) return 1;
         else return 2;
-    }
-
-    check_state(cur){
-        if(cur.element == 1 && cur != this.store1 && cur != this.store2){
-            if(this.player == 1 && this.check_board_side(cur) == 1 || this.player == 2 && this.check_board_side(cur) == 2){
-                let cur_pos = this.board.get_pos(cur);
-                let adjacent_hole = this.board.go_to_pos(this.size - cur_pos - 2);
-                let temp = adjacent_hole.element;
-                adjacent_hole.element = 0;
-                cur.element = 0;
-                if(this.player == 1) this.store1.element = parseInt(this.store1.element) + parseInt(temp);
-                else this.store2.element = parseInt(this.store2.element) + parseInt(temp);
-            }
-        } 
-        
-        if(cur != this.board.go_to_pos((this.size-2)/2) && cur != this.board.go_to_pos(this.size-1)){
-            if(this.player == 1) this.player = 2;
-            else this.player = 1;
-        }
-        console.log("Depois");
-        this.print_game();
     }
 
     move_pieces(element){
@@ -65,6 +45,25 @@ class Game {
         this.check_state(cur);
     }
 
+    check_state(cur){
+        if(cur.element == 1 && cur != this.store1 && cur != this.store2){
+            if(this.player == 1 && this.check_board_side(cur) == 1 || this.player == 2 && this.check_board_side(cur) == 2){
+                let cur_pos = this.board.get_pos(cur);
+                let adjacent_hole = this.board.go_to_pos(this.size - cur_pos - 2);
+                let temp = adjacent_hole.element;
+                adjacent_hole.element = 0;
+                cur.element = 0;
+                if(this.player == 1) this.store1.element = parseInt(this.store1.element) + parseInt(temp);
+                else this.store2.element = parseInt(this.store2.element) + parseInt(temp);
+            }
+        } 
+        
+        if(cur != this.board.go_to_pos((this.size-2)/2) && cur != this.board.go_to_pos(this.size-1)){
+            if(this.player == 1) this.player = 2;
+            else this.player = 1;
+        }
+    }
+
     print_player(){
         if(this.player == 1) {
             console.log("PLAYER 1:");
@@ -78,5 +77,9 @@ class Game {
 
     print_game(){
         this.board.printList();
+    }
+
+    ai_level_1(){
+        return Math.floor(Math.random() * 6) + 7;
     }
 }

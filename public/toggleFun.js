@@ -68,6 +68,7 @@ let game;
 
 window.onload = function() {
     game = new Game(current_holes.value,current_seeds.value);
+    game.opponent = 2;
     board(game);
   };
 
@@ -122,7 +123,7 @@ function genBeads(type,index,game){
 function updateHoverOnPlayer() {
     let holes = (game.size);
 
-    if (game.player === 1){
+    if (game.player == 1){
 
         for(let i = 0; i < holes/2-1; i++){
             addClass("pb"+i,"P1_hover"); 
@@ -131,13 +132,18 @@ function updateHoverOnPlayer() {
             removeClass("pt"+i,"P2_hover");
         }
     }
-    else{ 
+    if (game.player == 2 && game.opponent == 1){ 
         for(let i = 0; i < holes/2-1; i++){
             removeClass("pb"+i,"P1_hover");
         }
         for(let i = holes/2; i < holes-1; i++){
             addClass("pt"+i,"P2_hover");
         }  
+    }
+    if (game.player == 2 && game.opponent == 2){
+        for(let i = 0; i < holes/2-1; i++){
+            removeClass("pb"+i,"P1_hover");
+        }
     }
 }
 
@@ -170,13 +176,13 @@ function reset(){
 // funcao para gerar os buracos, type = "pb" e do P1, type = "pt" e do P2
 function genDiv(type,index,game){
     if(type == 'pb'){
-        return '<div class="pot border" id="'+type+index+'" style="width:'+(100/(game.size/2))+'%'+'" onClick="updateCanvas('+index+')">'
+        return '<div class="pot border" id="'+type+index+'" style="width:'+(100/(game.size/2))+'%'+'" onClick="updateCanvas'+game.opponent+'('+index+')">'
             +'<div class="seedCountPB">'
                 +game.board.get_element_at_position(index)
             +'</div>' 
         +'</div>';
     }else{
-        return '<div class="pot border" id="'+type+index+'" style="width:'+(100/(game.size/2))+'%'+'" onClick="updateCanvas('+index+')">'
+        return '<div class="pot border" id="'+type+index+'" style="width:'+(100/(game.size/2))+'%'+'" onClick="updateCanvas'+game.opponent+'('+index+')">'
             +'<div class="seedCountPT">'
                 +game.board.get_element_at_position(index)
             +'</div>' 
@@ -244,7 +250,7 @@ function board(game){
 
 }
 
-function updateCanvas(index){
+function updateCanvas1(index){
     let cur = game.board.go_to_pos(index);
     if(game.player == 1 && game.check_board_side(cur) == 1 || game.player == 2 && game.check_board_side(cur) == 2){
         if(cur.element != 0){
@@ -256,4 +262,28 @@ function updateCanvas(index){
             document.getElementById('playerTurnDisplay').innerHTML += '<div>'+game.print_player()+'</div>';
         }
     }
+}
+
+function updateCanvas2(index){
+    let cur = game.board.go_to_pos(index);
+    if(cur.element != 0){
+        game.move_pieces(index);
+        reset();
+        board(game);
+        updateHoverOnPlayer();
+        clearBox('playerTurnDisplay');
+        document.getElementById('playerTurnDisplay').innerHTML += '<div>'+game.print_player()+'</div>';
+        if(game.player == 2) ai_move();
+    }
+}
+
+function ai_move(){
+    while(game.player == 2){
+        game.move_pieces(game.ai_level_1());
+        reset();
+        board(game);
+    }
+    updateHoverOnPlayer();
+    clearBox('playerTurnDisplay');
+    document.getElementById('playerTurnDisplay').innerHTML += '<div>'+game.print_player()+'</div>';
 }
