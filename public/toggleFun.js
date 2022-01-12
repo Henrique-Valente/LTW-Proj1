@@ -7,6 +7,15 @@ function toggleRules(){
         x.style.display = "none";
     }
 }
+
+function sleep(milliseconds) {
+    const date = Date.now();
+    let currentDate = null;
+    do {
+      currentDate = Date.now();
+    } while (currentDate - date < milliseconds);
+  }
+
 function toggleScore(){
     const x = document.getElementById("score"); 
     if(x.style.display == "none"){
@@ -106,7 +115,7 @@ function genBeads(type,index,game){
         square.innerHTML += "<div class=test>hi</div>"
 
         var square2 = document.getElementsByClassName("test")
-        console.log(square2.innerHTML)
+        //console.log(square2.innerHTML)
 
     } else{
         var square = document.getElementById(type+index);
@@ -213,6 +222,7 @@ function genDivScore(type,index,game){
 }
 
 function board(game){
+    if(game.player == 2 || game.player == 1) console.log("AI UPDATE");
 
     let rangeValue_topmid = document.getElementById("topmid");
     let rangeValue_botmid = document.getElementById("botmid");
@@ -253,7 +263,6 @@ function board(game){
     }
 
     updateHoverOnPlayer();
-
 }
 
 function updateCanvas1(index){
@@ -279,17 +288,39 @@ function updateCanvas2(index){
         updateHoverOnPlayer();
         clearBox('playerTurnDisplay');
         document.getElementById('playerTurnDisplay').innerHTML += '<div>'+game.print_player()+'</div>';
+        console.log("---");
+        console.log("Player move was: " + index);
+        game.print_game();
+        console.log("---");
+        if(game.status == 2){ //Quando o jogo terminar
+            window.alert("The game has finished!");
+        }
         if(game.player == 2) ai_move();
     }
 }
 
 function ai_move(){
     while(game.player == 2){
-        game.move_pieces(game.ai_level_1());
+        let x = game.ai_level_1();
+        let cur = game.board.go_to_pos(x);
+        
+        while(cur.element == 0){
+            x = game.ai_level_1();
+            cur = game.board.go_to_pos(x);
+        }     
+        //sleep(1000);
+        game.move_pieces(x);
         reset();
         board(game);
+        console.log("---");
+        console.log("My move was: " + x);
+        game.print_game();
+        console.log("---");
     }
     updateHoverOnPlayer();
     clearBox('playerTurnDisplay');
     document.getElementById('playerTurnDisplay').innerHTML += '<div>'+game.print_player()+'</div>';
+    if(game.status == 2){ //Quando o jogo terminar
+        window.alert("The game has finished!");
+    }
 }

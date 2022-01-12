@@ -17,6 +17,7 @@ class Game {
         this.store1 = cur1;
         this.store2 = cur2;
         this.opponent = 0; // 0 -> Por definir, 1 -> Contra jogador, 2 -> Contra AI
+        this.status = 1; // 1 -> Jogo por terminar , 2 -> Jogo terminou
     }
 
     check_board_side(cur){ // returns which side of the board the given node is in
@@ -26,7 +27,7 @@ class Game {
 
     move_pieces(element){
         this.print_player();
-        console.log("Antes");
+        //console.log("Antes");
         this.print_game();
         let pos = element; 
         let cur = this.board.go_to_pos(pos);
@@ -62,15 +63,43 @@ class Game {
             if(this.player == 1) this.player = 2;
             else this.player = 1;
         }
+        
+        if(this.check_end() == 1) return;
+        else this.status = 2;
+    }
+
+    check_end(){
+        let cur = this.board.head;
+        let i=0;
+        let j=this.size/2+1;
+        let check_player_1 = 0; // 1 -> Ainda não terminou , 2 -> Já terminou
+        let check_player_2 = 0; // 1 -> Ainda não terminou , 2 -> Já terminou
+        for(i; i<(this.size-2)/2;i++){
+            if(cur.element != 0){
+                check_player_1 = 1;
+                break;
+            }
+            cur = cur.next;
+        }
+        cur = this.board.go_to_pos(j);
+        for(j; j<this.size-1;j++){
+            if(cur.element != 0){
+                check_player_2 = 1;
+                break;
+            }
+            cur = cur.next;
+        }
+        if(check_player_1 == 1 && check_player_2 == 1) return 1; //O jogo ainda não terminou
+        else return 0; //O jogo terminou
     }
 
     print_player(){
         if(this.player == 1) {
-            console.log("PLAYER 1:");
+            //console.log("PLAYER 1:");
             return "Player: 1";
         }
         else{
-            console.log("PLAYER 2:");
+            //console.log("PLAYER 2:");
             return "Player: 2";
         } 
     }
