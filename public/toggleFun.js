@@ -8,13 +8,7 @@ function toggleRules(){
     }
 }
 
-function sleep(milliseconds) {
-    const date = Date.now();
-    let currentDate = null;
-    do {
-      currentDate = Date.now();
-    } while (currentDate - date < milliseconds);
-  }
+function sleep(ms) {   return new Promise(resolve => setTimeout(resolve, ms)); }
 
 function toggleScore(){
     const x = document.getElementById("score"); 
@@ -77,7 +71,7 @@ let game;
 
 window.onload = function() {
     game = new Game(current_holes.value,current_seeds.value);
-    game.opponent = 2;
+    game.opponent = 1; //Começa com multiplayer por default ?
     board(game);
   };
 
@@ -96,10 +90,13 @@ function toggleApply(){
 
     current_holes.value = slider_holes.value;
     current_seeds.value = slider_seeds.value;
+    ai_level.value = slider_ai.value;
+    console.log(ai_level.value);
 
     game = new Game(current_holes.value,current_seeds.value);
-    board(game);
-    
+    if(document.getElementById('opponent_AI').checked) game.opponent = 2; 
+    else if(document.getElementById('opponent_player').checked) game.opponent = 1;
+    board(game); 
 }
 function generateRandomIntegerInRange(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -279,6 +276,15 @@ function updateCanvas1(index){
     }
 }
 
+function game_over(){
+    if(game.status == 2){ //Quando o jogo terminar
+        console.log("ALERT!");           
+        setTimeout(() => {alert('The game has ended!')}, 100);
+    }
+}
+
+//JOGO CONTRA COMPUTADOR
+
 function updateCanvas2(index){
     let cur = game.board.go_to_pos(index);
     if(cur.element != 0){
@@ -288,39 +294,60 @@ function updateCanvas2(index){
         updateHoverOnPlayer();
         clearBox('playerTurnDisplay');
         document.getElementById('playerTurnDisplay').innerHTML += '<div>'+game.print_player()+'</div>';
+
         console.log("---");
         console.log("Player move was: " + index);
         game.print_game();
         console.log("---");
-        if(game.status == 2){ //Quando o jogo terminar
-            window.alert("The game has finished!");
-        }
-        if(game.player == 2) ai_move();
+        
+        game_over();
+
+        if(game.player == 2 && game.status != 2){
+            ai_move();
+            game_over();
+        } 
     }
 }
 
-function ai_move(){
-    while(game.player == 2){
-        let x = game.ai_level_1();
-        let cur = game.board.go_to_pos(x);
-        
-        while(cur.element == 0){
-            x = game.ai_level_1();
-            cur = game.board.go_to_pos(x);
-        }     
-        //sleep(1000);
-        game.move_pieces(x);
-        reset();
-        board(game);
-        console.log("---");
-        console.log("My move was: " + x);
-        game.print_game();
-        console.log("---");
-    }
+async function ai_move(){
+    await sleep(100);
+
+    if(ai_level.value == 1) game.move_pieces(ai_1_selection()); // Mover as peças do jogo no backend
+    else if(ai_level.value == 2) game.move_pieces(ai_2_selection());
+    reset(); //Apaga os containers
+    board(game);
+
     updateHoverOnPlayer();
     clearBox('playerTurnDisplay');
     document.getElementById('playerTurnDisplay').innerHTML += '<div>'+game.print_player()+'</div>';
-    if(game.status == 2){ //Quando o jogo terminar
-        window.alert("The game has finished!");
+
+    if(game.player == 2){
+        await ai_move();
     }
+}
+
+function ai_1_selection(){
+    let x = game.ai_level_1();
+    let cur = game.board.go_to_pos(x);
+    
+    while(cur.element == 0){  //Se a posição selecionada pela AI for 0
+        x = game.ai_level_1();
+        cur = game.board.go_to_pos(x);
+    }
+
+    return x;
+}
+
+function ai_2_selection(){
+    let x = game.ai_level_2();
+    console.log(x);
+    let cur = game.board.go_to_pos(x);
+    
+    while(cur.element == 0){  //Se a posição selecionada pela AI for 0
+        console.log("Am i stuck here ? ");
+        x = game.ai_level_2();
+        cur = game.board.go_to_pos(x);
+    }
+
+    return x;
 }
