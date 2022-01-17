@@ -70,6 +70,9 @@ document.addEventListener("DOMContentLoaded", function( ) {
 let game;
 
 window.onload = function() {
+    const x = document.getElementById("rules");
+    x.style.display = "none";
+
     game = new Game(current_holes.value,current_seeds.value);
     game.opponent = 1; //Começa com multiplayer por default ?
     board(game);
