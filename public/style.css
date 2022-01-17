@@ -241,3 +241,20 @@ html {
 .P2_hover:hover {
   background-color: yellow;
 }
+
+/* ----------------------------------------------------------------------------------------------- */
+
+#rules {
+    z-index: 1;
+    background-color: #1B2021;
+    display: inline-block;
+    position: fixed;
+    left: 50%;
+    transform: translate(-50%, 0);
+}
+
+#rules_text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

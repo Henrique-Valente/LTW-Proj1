@@ -273,6 +273,8 @@ function updateCanvas1(index){
             clearBox('playerTurnDisplay');
             document.getElementById('playerTurnDisplay').innerHTML += '<div>'+game.print_player()+'</div>';
         }
+
+        game_over();
     }
 }
 
@@ -294,12 +296,7 @@ function updateCanvas2(index){
         updateHoverOnPlayer();
         clearBox('playerTurnDisplay');
         document.getElementById('playerTurnDisplay').innerHTML += '<div>'+game.print_player()+'</div>';
-
-        console.log("---");
-        console.log("Player move was: " + index);
-        game.print_game();
-        console.log("---");
-        
+       
         game_over();
 
         if(game.player == 2 && game.status != 2){
