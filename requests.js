@@ -29,7 +29,7 @@ async function register(nick,password){
 
     let req = await request("register",register_init);
 
-    return req;
+    return req.json();
     /*if(req.ok) alert("Bem sucedido");
     else {
         let data = req.json();
@@ -54,6 +54,37 @@ async function join(nick,password,size,initial){
     return req.json();
 }
 
+async function leave(nick,password,game){
+    const leave_init = {
+        method:'POST',
+        body: JSON.stringify({
+            "nick": nick,
+            "password": password,
+            "game": game,
+        })
+    };
+
+    let req = await request("leave",leave_init);
+
+    return req.json;
+}
+
+async function notify(nick,password,game,move){
+    const notify_init = {
+        method:'POST',
+        body: JSON.stringify({
+            "nick": nick,
+            "password": password,
+            "game": game,
+            "move": move,
+        })
+    };
+
+    let req = await request("notify",notify_init);
+
+    return req.json;
+}
+
 async function update(game,nick,error,func){
     const url = new URL(`http://${server}:${port}/update`);
     let params = [
@@ -69,8 +100,3 @@ async function update(game,nick,error,func){
     
     return eventSource;
 }
-
-
-
-
-
