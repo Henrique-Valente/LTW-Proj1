@@ -1,3 +1,7 @@
+//************************ GLOBAL *******************************
+let login;
+//************************ FIM GLOBAL *******************************
+
 function toggleRules(){
     const x = document.getElementById("rules"); 
     if(x.style.display == "none"){
@@ -10,8 +14,9 @@ function toggleRules(){
 
 function sleep(ms) {   return new Promise(resolve => setTimeout(resolve, ms)); }
 
-function toggleScore(){
-    const x = document.getElementById("score"); 
+//************************ REGISTO/LOGIN *******************************
+function toggleRegister(){
+    const x = document.getElementById("register_div");
     if(x.style.display == "none"){
         x.style.display = "block";
     }
@@ -19,6 +24,57 @@ function toggleScore(){
         x.style.display = "none";
     }
 }
+
+async function responseRegister(){
+    const nName = document.getElementById("nname");
+    const pWord = document.getElementById("pword");
+    const nickname = document.getElementById("login_name");
+    let data = await register(nName.value,pWord.value);
+    const x = document.getElementById("register_div");
+    
+    if(data.ok){
+        alert("Registo efetuado com sucesso!");
+        login = nName;
+        nickname.innerHTML += login.value;
+        nickname.style.display = "block";
+        x.style.display = "none";
+    } 
+    else {
+		let json = await data.json();
+		alert(json.error);
+	}
+}
+//************************ FIM REGISTO/LOGIN *******************************
+
+//************************ PONTUAÇÃO *******************************
+async function generateRanking(){
+    const x = document.getElementById("score_text"); 
+    let data = await ranking();
+    let json = await data.json();
+    data = json.ranking;
+    
+    let paragraph = document.createElement("p");
+
+    for(let i=0; i<data.length; i++){
+        x.innerHTML += "Nickname: " + data[i].nick;
+        x.innerHTML += " Games Played: " + data[i].games;
+        x.innerHTML += " Victories: " + data[i].victories;
+        x.appendChild(paragraph);
+    }
+}
+
+function toggleScore(){
+    const x = document.getElementById("score"); 
+    if(x.style.display == "none"){
+        generateRanking(); 
+        x.style.display = "block";
+    }
+    else {
+        x.style.display = "none";
+        document.getElementById("score_text").innerHTML = '';
+    }
+}
+//************************ FIM PONTUAÇÃO *******************************
 
 // Current board settings
 
@@ -71,8 +127,12 @@ let game;
 
 window.onload = function() {
     const x = document.getElementById("rules");
+    const y = document.getElementById("score");
+    const z = document.getElementById("register_div");
     x.style.display = "none";
-
+    y.style.display = "none";
+    z.style.display = "none";
+    
     game = new Game(current_holes.value,current_seeds.value);
     game.opponent = 1; //Começa com multiplayer por default ?
     board(game);

@@ -245,16 +245,48 @@ html {
 /* ----------------------------------------------------------------------------------------------- */
 
 #rules {
-    z-index: 1;
-    background-color: #1B2021;
-    display: inline-block;
-    position: fixed;
-    left: 50%;
-    transform: translate(-50%, 0);
+  z-index: 1;
+  background-color: #1B2021;
+  display: inline-block;
+  position: fixed;
+  left: 50%;
+  transform: translate(-50%, 0);
 }
 
 #rules_text {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+#score {
+  z-index: 1;
+  background-color: #1B2021;
+  display: inline-block;
+  position: fixed;
+  left: 50%;
+  transform: translate(-50%, 0);
+}
+
+#score_text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#register_div{
+  z-index: 1;
+  background-color: #1B2021;
+  height: 200px;
+  width: 300px;
+  position: fixed;
+  left: 50%;
+  transform: translate(-50%, 0);
+}
+
+#login_name{
+  display: none;
+  align-items: center;
+  position: fixed;
+  right: 10%;
 }

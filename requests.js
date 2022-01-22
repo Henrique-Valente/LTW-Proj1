@@ -13,9 +13,9 @@ async function ranking(){
         body: JSON.stringify({})
     };
 
-    let req = await request("ranking",ranking_init);
+    let req = request("ranking",ranking_init);
 
-    return req.json();
+    return req;
 }
 
 async function register(nick,password){
@@ -27,14 +27,9 @@ async function register(nick,password){
         })
     };
 
-    let req = await request("register",register_init);
+    let req = request("register",register_init);
 
-    return req.json();
-    /*if(req.ok) alert("Bem sucedido");
-    else {
-        let data = req.json();
-        alert(data.error);
-    }*/
+    return req;
 }
 
 async function join(nick,password,size,initial){

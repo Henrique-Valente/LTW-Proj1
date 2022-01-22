@@ -24,7 +24,29 @@
   </head>
 
   <body bgcolor="#1B2021">
+    <h3 id="login_name">Player: </h3>
+
     <h1 class="title" id="pageTitle">Mancala</h1>
+
+    <div class="hiddenBox border" id="register_div">
+      <center>
+        <h3>Register</h3>
+        <form id="auth-Form">
+          <label for="nickname">Nickname:</label>
+            <input type="text" id="nname" name="nname"><br><br>
+          <label for="password">Password:</label>
+            <input type="password" id="pword" name="pword"><br><br>
+            <button type="button" id="authButton" onclick="responseRegister()">Submit</button>
+        </form>
+      </center>
+    </div>
+
+    <div class="hiddenBox border" id="score">
+      <center>
+        <h3>Score</h3>
+      </center>
+      <div id="score_text"></div>
+    </div>
 
     <div class="hiddenBox border" id="rules">
       <div id="rules_text">
@@ -140,6 +162,10 @@
 
             </div>  
             
+            <!-- Login Button-->
+            <div class="item" id="apply_box">
+              <button class="settingsButtons border" id="register" onclick="toggleRegister()">Registo</button>
+            </div>
             
             <!-- Caixa dos buttons -->
             <div class="item" id="apply_box">
@@ -154,7 +180,7 @@
 
             <!-- Caixa dos buttons -->
             <div class="item">
-              <button class="settingsButtons border" onclick="board()">Pontuação</button>
+              <button class="settingsButtons border" onclick="toggleScore()">Pontuação</button>
             </div>
 
             <!-- Caixa das regras -->
@@ -167,14 +193,6 @@
  
       </div>
     </div>
-
-
-   
-
-    <div class="hiddenBox border" id="score">
-      Score
-    </div>
-
-    
+  
   </body>
 </html>
