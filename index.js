@@ -32,7 +32,16 @@ const server = http.createServer((request, response) => {
 });
 
 function ranking(request, response, body) {
-  console.log(request.url);
+  var storeData = readFile("ranking");
+
+  storeData["ranking"].sort(function (a, b) {
+    return b.victories.toString().localeCompare(a.victories).toString();
+  });
+
+  response.statusCode = 200;
+  const storeDatajson = JSON.stringify(storeData);
+  response.write(storeDatajson);
+  response.end();
 }
 
 function register(request, response, body) {
