@@ -144,9 +144,11 @@
               <div class="sliderContainer">
                 <div class="radiobutton">
                   <input type="radio" id="opponent_player" name="opponent" value="Jogador" checked>
-                  <label for="opponent_player">Jogador</label>
+                  <label for="opponent_player">Local</label>
                   <input type="radio" id="opponent_AI" name="opponent" value="AI">
                   <label for="opponent_AI">AI</label>
+                  <input type="radio" id="multiplayer" name="opponent" value="Multiplayer">
+                  <label for="multiplayer">Multiplayer</label>
               </div>
             </div>
 
@@ -169,13 +171,13 @@
             
             <!-- Caixa dos buttons -->
             <div class="item" id="apply_box">
-              <button class="settingsButtons border" id="cancel" onclick="toggleCancel()">Cancel</button>
+              <button class="settingsButtons border" id="leave" onclick="toggleLeaveGame()">Leave Game</button>
               <button class="settingsButtons border" id="apply" onclick="toggleApply()">Apply</button>
             </div>
             
             <!-- Caixa dos buttons -->
             <div class="item" id="apply_box">
-              <button class="settingsButtons border" id="start">Start</button>
+              <button class="settingsButtons border" id="start" onclick="toggleStart()">Start Multiplayer</button>
             </div>
 
             <!-- Caixa dos buttons -->

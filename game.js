@@ -16,7 +16,7 @@ class Game {
         this.player = 1;
         this.store1 = cur1;
         this.store2 = cur2;
-        this.opponent = 0; // 0 -> Por definir, 1 -> Contra jogador, 2 -> Contra AI
+        this.opponent = 0; // 0 -> Por definir, 1 -> Contra jogador online, 2 -> Contra AI, 3 -> Contra jogador localmente
         this.status = 1; // 1 -> Jogo por terminar , 2 -> Jogo terminou
     }
 
@@ -132,4 +132,23 @@ class Game {
 
         return this.board.get_pos(output);
     }
-}
+
+    //**********************Funções para comunicar com o servidor**********************
+    array_to_list(array, pos_i){
+        let cur = this.board.go_to_pos(pos_i);
+        for(let i=0; i<(this.size-2)/2;i++){
+            cur.element = array[i];
+            cur = cur.next;
+        }
+    }
+
+    fill_my_side(array, store){
+        this.array_to_list(array,0);
+        this.store1.element = store;
+    }
+
+    fill_enemy_side(array, store){
+        this.array_to_list(array,(this.size)/2);
+        this.store2.element = store;
+    }
+}       

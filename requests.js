@@ -38,15 +38,14 @@ async function join(nick,password,size,initial){
         body: JSON.stringify({
             "nick": nick,
             "password": password,
-            "group": group,
             "size": size,
             "initial": initial,
         })
     };
 
-    let req = await request("join",join_init);
+    let req = request("join",join_init);
 
-    return req.json();
+    return req;
 }
 
 async function leave(nick,password,game){
@@ -59,9 +58,9 @@ async function leave(nick,password,game){
         })
     };
 
-    let req = await request("leave",leave_init);
+    let req = request("leave",leave_init);
 
-    return req.json;
+    return req;
 }
 
 async function notify(nick,password,game,move){
@@ -77,10 +76,10 @@ async function notify(nick,password,game,move){
 
     let req = await request("notify",notify_init);
 
-    return req.json;
+    return req;
 }
 
-async function update(game,nick,error,func){
+async function update(game,nick,func){
     const url = new URL(`http://${server}:${port}/update`);
     let params = [
         ['nick', nick],
@@ -90,7 +89,6 @@ async function update(game,nick,error,func){
     
     const eventSource = new EventSource(url);
 
-    eventSource.onerror = error;
     eventSource.onmessage = func;
     
     return eventSource;

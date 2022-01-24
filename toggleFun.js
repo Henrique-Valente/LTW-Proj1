@@ -1,5 +1,22 @@
 //************************ GLOBAL *******************************
 let login;
+let opponent;
+let pass;
+let game_hash;
+let ev;
+let game;
+
+// Current board settings
+
+let current_holes = {value:0};
+let current_seeds = {value:0};
+let ai_level = {value:1};
+
+
+// This function updates values in slider
+let slider_holes ; let output_holes ;
+let slider_seeds ; let output_seeds ;
+let slider_ai    ; let output_ai    ;
 //************************ FIM GLOBAL *******************************
 
 function toggleRules(){
@@ -33,8 +50,9 @@ async function responseRegister(){
     const x = document.getElementById("register_div");
     
     if(data.ok){
-        alert("Registo efetuado com sucesso!");
+        alert("Registo/Login efetuado com sucesso!");
         login = nName;
+        pass = pWord;
         nickname.innerHTML += login.value;
         nickname.style.display = "block";
         x.style.display = "none";
@@ -76,17 +94,102 @@ function toggleScore(){
 }
 //************************ FIM PONTUAÇÃO *******************************
 
-// Current board settings
+//************************ JOIN/LEAVE/START *******************************
 
-let current_holes = {value:0};
-let current_seeds = {value:0};
-let ai_level = {value:1};
+async function toggleLeaveGame(){
+    let data = await leave(login.value,pass.value,game_hash);
+    
+    if(data.ok){
+        reset();
+        game = new Game(current_holes.value,current_seeds.value);
+        board(game);
+        alert("You left the game.")
+    } 
+    else{
+        let json = await data.json();
+        alert(json.error);
+    }
+}
 
+async function toggleApply(){
+    reset();
 
-// This function updates values in slider
-let slider_holes ; let output_holes ;
-let slider_seeds ; let output_seeds ;
-let slider_ai    ; let output_ai    ;
+    current_holes.value = slider_holes.value;
+    current_seeds.value = slider_seeds.value;
+    ai_level.value = slider_ai.value;
+    console.log(ai_level.value);
+
+    game = new Game(current_holes.value,current_seeds.value);
+    if(document.getElementById('multiplayer').checked) game.opponent = 1;
+    else if(document.getElementById('opponent_AI').checked) game.opponent = 2; 
+    else if(document.getElementById('opponent_player').checked) game.opponent = 3;
+    board(game); 
+    
+}
+
+async function toggleStart(){
+    if(game.opponent == 1){
+        let data = await join(login.value , pass.value ,(current_holes.value/2), current_seeds.value); //Request join
+        let json = await data.json();
+        game_hash = json.game;
+        ev = await update(game_hash,login.value,serverUpdates);
+    }
+}
+
+//************************ FIM JOIN/LEAVE/START *******************************
+
+//************************ UPDATE *******************************
+
+async function serverUpdates(e){
+    console.log("entrei");
+    let data = JSON.parse(e.data);
+
+    Object.keys(data.stores).forEach(player => {
+        if (player != login.value) opponent = player;
+    });
+
+    if(data.winner !== undefined){
+        if(data.winner === null){
+            alert("Draw!")
+            reset();
+        }
+
+        else if(data.winner === login.value){
+            alert("You won!");
+            reset();
+        }
+
+        else if(data.winner === opponent){
+            alert("You lost!");
+            reset();
+        }
+    }
+
+    else{
+        let player_board = data.board.sides[login.value].pits;
+        let player_score = data.board.sides[login.value].store;
+        let enemy_board = data.board.sides[opponent].pits;
+        let enemy_score = data.board.sides[opponent].store;
+    
+        console.log("My score: " + player_score);
+        console.log("Enemy score " + enemy_score);
+        game.print_game();
+    
+        game.fill_my_side(player_board,player_score);
+        game.fill_enemy_side(enemy_board,enemy_score);
+    
+        reset();
+        clearBox('playerTurnDisplay');
+        console.log(data.board.turn);
+        if(data.board.turn == login.value) document.getElementById('playerTurnDisplay').innerHTML = "Playing: " + login.value;
+        else document.getElementById('playerTurnDisplay').innerHTML = "Playing: " + opponent;
+        board(game);
+    }
+
+    
+}
+
+//************************ FIM UPDATE *******************************
 
 document.addEventListener("DOMContentLoaded", function( ) {
     // holes start function
@@ -123,8 +226,6 @@ document.addEventListener("DOMContentLoaded", function( ) {
     }
 })
 
-let game;
-
 window.onload = function() {
     const x = document.getElementById("rules");
     const y = document.getElementById("score");
@@ -134,39 +235,13 @@ window.onload = function() {
     z.style.display = "none";
     
     game = new Game(current_holes.value,current_seeds.value);
-    game.opponent = 1; //Começa com multiplayer por default ?
+    game.opponent = 0; //Começa com multiplayer por default ?
     board(game);
-  };
+};
 
-function toggleCancel(){
-
-    slider_holes.value = current_holes.value;
-    output_holes.innerHTML = current_holes.value;
-
-    slider_seeds.value = current_seeds.value;
-    output_seeds.innerHTML = current_seeds.value;
-    
-}
-
-function toggleApply(){
-    reset();
-
-    current_holes.value = slider_holes.value;
-    current_seeds.value = slider_seeds.value;
-    ai_level.value = slider_ai.value;
-    console.log(ai_level.value);
-
-    game = new Game(current_holes.value,current_seeds.value);
-    if(document.getElementById('opponent_AI').checked) game.opponent = 2; 
-    else if(document.getElementById('opponent_player').checked) game.opponent = 1;
-    board(game); 
-}
 function generateRandomIntegerInRange(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
-
-
-//
 
 function genBeads(type,index,game){
 
@@ -192,9 +267,6 @@ function genBeads(type,index,game){
     }
 }
 
-
-//
-
 function updateHoverOnPlayer() {
     let holes = (game.size);
 
@@ -207,7 +279,7 @@ function updateHoverOnPlayer() {
             removeClass("pt"+i,"P2_hover");
         }
     }
-    if (game.player == 2 && game.opponent == 1){ 
+    if (game.player == 2 && game.opponent == 3){ 
         for(let i = 0; i < holes/2-1; i++){
             removeClass("pb"+i,"P1_hover");
         }
@@ -215,7 +287,7 @@ function updateHoverOnPlayer() {
             addClass("pt"+i,"P2_hover");
         }  
     }
-    if (game.player == 2 && game.opponent == 2){
+    if (game.player == 3 && game.opponent == 2){
         for(let i = 0; i < holes/2-1; i++){
             removeClass("pb"+i,"P1_hover");
         }
@@ -282,8 +354,6 @@ function genDivScore(type,index,game){
 }
 
 function board(game){
-    if(game.player == 2 || game.player == 1) console.log("AI UPDATE");
-
     let rangeValue_topmid = document.getElementById("topmid");
     let rangeValue_botmid = document.getElementById("botmid");
     let rangeValue_leftmid = document.getElementById("startsection");
@@ -293,7 +363,7 @@ function board(game){
     let i=0;
 
     // adicionar que jogador é a vez
-    document.getElementById('playerTurnDisplay').innerHTML += '<div>'+game.print_player()+'</div>';
+    if (game.opponent == 3) document.getElementById('playerTurnDisplay').innerHTML += '<div>'+game.print_player()+'</div>';
 
     // preencher a parte de baixo = P1
     for(;i < holes/2-1;i++){
@@ -325,7 +395,22 @@ function board(game){
     updateHoverOnPlayer();
 }
 
-function updateCanvas1(index){
+async function updateCanvas1(index){
+    let data = await notify(login.value,pass.value,game_hash,index);
+    let json = await data.json();
+    if(json.error !== undefined)alert(json.error); 
+}
+
+function game_over(){
+    if(game.status == 2){ //Quando o jogo terminar
+        console.log("ALERT!");           
+        setTimeout(() => {alert('The game has ended!')}, 100);
+    }
+}
+
+//JOGO CONTRA COMPUTADOR OU CONTRA OUTRO JOGADOR LOCALMENTE
+
+function updateCanvas3(index){
     let cur = game.board.go_to_pos(index);
     if(game.player == 1 && game.check_board_side(cur) == 1 || game.player == 2 && game.check_board_side(cur) == 2){
         if(cur.element != 0){
@@ -340,15 +425,6 @@ function updateCanvas1(index){
         game_over();
     }
 }
-
-function game_over(){
-    if(game.status == 2){ //Quando o jogo terminar
-        console.log("ALERT!");           
-        setTimeout(() => {alert('The game has ended!')}, 100);
-    }
-}
-
-//JOGO CONTRA COMPUTADOR
 
 function updateCanvas2(index){
     let cur = game.board.go_to_pos(index);
