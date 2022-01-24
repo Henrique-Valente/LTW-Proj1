@@ -120,14 +120,14 @@ html {
 }
 
 .hiddenBox{
-  display: none;
-  margin-top: 10px;
+  position:absolute;
+  top:5%;
+  left:50%;
+
 }
 
 #playerTurnDisplay{
-  flex: 1 0 21%; /* explanation below */
-  margin: 5px;
-  height: 100px;
+  font-size: 3em;
 }
 /* -------------------------- */
 
@@ -177,11 +177,23 @@ html {
   border-radius: 50%;
   display: inline-block;
 }
+
+.beadsContainerScore{
+  
+  background-color: red;
+}
+
+.beadsContainerPot{
+  /* width: 50%;
+  height: 50%; */
+  /* border: 3px solid green;
+  background-color: red; */
+}
 /* ----------------------------------------------------------------------------------------------- */
 
 
 .section{
-  background-color:rgba(255, 255, 255, 0.03);
+  /* background-color:rgba(255, 255, 255, 0.03); */
   margin:5px;
 }
 

@@ -242,28 +242,38 @@ window.onload = function() {
 function generateRandomIntegerInRange(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
-
+function getRandomColor() {
+    var letters = '0123456789ABCDEF';
+    var color = '#';
+    for (var i = 0; i < 6; i++) {
+      color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+  }
+  
 function genBeads(type,index,game){
 
     if(type === "mt" || type === "mb"){
-	    var square = document.getElementById(type);
-        square.innerHTML += "<div class=test>hi</div>"
-
-        var square2 = document.getElementsByClassName("test")
-        //console.log(square2.innerHTML)
+	    var square = document.getElementById("beadsContainer"+type);
+    
+        // var height = document.querySelector("#beadsContainer"+type).offsetHeight;
+        // var width = document.querySelector("#beadsContainer"+type).offsetWidth;
 
     } else{
-        var square = document.getElementById(type+index);
+        var square = document.getElementById("beadsContainer"+type+index);
+        // var height = document.querySelector("#beadsContainer"+type+index).offsetHeight;
+        // console.log(height)
+        // var width = document.querySelector("#beadsContainer"+type+index).offsetWidth;
     }
 
     var number = game.board.get_element_at_position(index);
-    
+   
     
 
     for (let int = 0; int < number; int++) {
-        let x = generateRandomIntegerInRange(35,0);
-        let y = generateRandomIntegerInRange(0,35);
-        square.innerHTML += "<div class=bead style=top:"+x+"px;"+"left:"+y+"px"+"></div>"
+        let x = generateRandomIntegerInRange(10,60);
+        let y = generateRandomIntegerInRange(10,60);
+        square.innerHTML += "<div class=bead style=top:"+x+"px;"+"left:"+y+"px"+";background-color:" + getRandomColor()+"></div>"
     }
 }
 
@@ -324,13 +334,15 @@ function reset(){
 function genDiv(type,index,game){
     if(type == 'pb'){
         return '<div class="pot border" id="'+type+index+'" style="width:'+(100/(game.size/2))+'%'+'" onClick="updateCanvas'+game.opponent+'('+index+')">'
-            +'<div class="seedCountPB">'
+        +'<div class="beadsContainerPot" id="beadsContainer'+type+index+'"></div>' 
+        +'<div class="seedCountPB">'
                 +game.board.get_element_at_position(index)
             +'</div>' 
         +'</div>';
     }else{
         return '<div class="pot border" id="'+type+index+'" style="width:'+(100/(game.size/2))+'%'+'" onClick="updateCanvas'+game.opponent+'('+index+')">'
-            +'<div class="seedCountPT">'
+        +'<div class="beadsContainerPot" id="beadsContainer'+type+index+'"></div>' 
+        +'<div class="seedCountPT">'
                 +game.board.get_element_at_position(index)
             +'</div>' 
         +'</div>';
@@ -340,12 +352,14 @@ function genDiv(type,index,game){
 function genDivScore(type,index,game){
     if(type == 'mt'){
         return '<div class="pot border" id="'+type+'">'
+        +'<div class="beadsContainerScore" id="beadsContainer'+type+'"></div>' 
             +'<div class="seedCountPB">'
                 + "Score: " + game.board.get_element_at_position(index)
             +'</div>' 
         +'</div>';
     }else{
         return '<div class="pot border" id="'+type+'">'
+        +'<div class="beadsContainerScore" id="beadsContainer'+type+'"></div>' 
             +'<div class="seedCountPT">'
                 + "Score: " + game.board.get_element_at_position(index)
             +'</div>' 

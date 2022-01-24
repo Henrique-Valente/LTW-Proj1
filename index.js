@@ -83,7 +83,6 @@ function register(request, response, body) {
     return;
   }
 
-  //verificar se o objet esta no ficheiro
 }
 
 function readFile(file) {
